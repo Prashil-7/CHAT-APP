@@ -1,15 +1,11 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import { useAuthStore } from '../store/useAuthStore';
 
-function Navbar() {
+function ProfilePage() {
     const {authUser}= useAuthStore();
   return (
-    <div>
-        hello from nav
-
-    </div>
+    <div>ProfilePage</div>
   )
 }
 
-export default Navbar
+export default ProfilePage
