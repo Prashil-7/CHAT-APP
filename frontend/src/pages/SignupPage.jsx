@@ -3,23 +3,34 @@ import { useAuthStore } from '../store/useAuthStore';
 import AuthImagePattern from '../Components/AuthImagePattern'
 import {Eye, EyeOff, Loader2, Lock, Mail, MessageSquare , User} from 'lucide-react'
 import { Link } from 'react-router-dom';
+import LoginPage from './LoginPage';
+import toast from 'react-hot-toast'
 
 const  SignupPage = () => {
   const [showPassword ,setShowPassword] = useState(false);
 
-  const [fromData ,setFromData] = useState({
+  const [formData ,setFormData] = useState({
     fullName:"",
     email:"",
-    Password:"",
+    password:"",
   });
 
-  const {issignup , isSigningUp} = useAuthStore();
+  const {signup , isSigningUp} = useAuthStore();
   
   const validateForm =()=>{
+    if(!formData.fullName.trim()) return toast.error("fullname is required");
+    if(!formData.email.trim()) return toast.error("email is required");
+   // if(!/S+@+\S+\.\S+/.test(formData.email)) return toast.error("email is Invalid")
+    if(!formData.password) return toast.error("fullname is required");
+    if(formData.password.length <6 ) return toast.error("at least 6 character password") 
+     return true;
+
     
   };
   const handleSubmit =(e)=>{
     e.preventDefault();
+    const success = validateForm();
+    if(success === true) signup(formData);
   }
 
   return (
@@ -51,8 +62,8 @@ const  SignupPage = () => {
                   <input type="text"
                   className={`input input-border w-full pl-10`}
                   placeholder='Prashil Lonare'
-                  value={FormData.fullName}
-                  onChange={(e)=> setFromData({...FormData ,fullName: e.target.value})} />
+                  value={formData.fullName}
+                  onChange={(e)=> setFormData({...formData ,fullName: e.target.value})} />
                 </div>
               </div>
               {/* {email tag colm} */}
@@ -68,8 +79,8 @@ const  SignupPage = () => {
                   <input type="email"
                   className={`input input-border w-full pl-10`}
                   placeholder='you@exsample.com'
-                  value={FormData.email}
-                  onChange={(e)=> setFromData({...FormData ,email: e.target.value})} />
+                  value={formData.email}
+                  onChange={(e)=> setFormData({...formData ,email: e.target.value})} />
                 </div>
               </div>
                 {/* {password field with hidden password FEATURE} */}
@@ -84,8 +95,8 @@ const  SignupPage = () => {
                   <input type= {showPassword ?"text": "password"}
                   className={`input input-border w-full pl-10`}
                   placeholder='********'
-                  value={FormData.Password}
-                  onChange={(e)=> setFromData({...FormData ,Password: e.target.value})} />
+                  value={formData.password}
+                  onChange={(e)=> setFormData({...formData ,password: e.target.value})} />
 
                     {/* {submit btn} */}
                   <button type="button"
