@@ -38,5 +38,53 @@ export const useAuthStore = create((set)=>({
         finally{
             set({isSigningup: false});
         }
-    }
+    },
+
+    login :async (data)=>{
+            set({isLoggingIn :true});
+            try {
+                
+                const res = await axiosInstance.post("/auth/login",data);
+                set({authUser :res.data});
+                toast.success("Successfully logged in");
+
+            } catch (error) {
+                console.log(`err i login authstore`,error.response.data.message);
+                    toast.error(error.response.message);              
+            }
+            finally{
+                set({isLoggingIn : false});
+            }   
+
+    },
+
+
+    logout : async ()=>{
+        try {
+            await axiosInstance.post("/auth/logout");
+            set({authUser:null});
+            toast.success("Successfully logged out");
+        } catch (error) {
+            console.log(`the err in logout authstore` + error.response.message);
+            toast.error(error.response.message);
+        }
+    },
+
+    updateProfile : async (data)=>{
+        set({isUpdatingProfile: true});
+        try {
+            const res= await axiosInstance.put("/auth/profile",data);
+            set({authUser :res.data});
+            toast.success("Successfully updated profile");
+            
+        } catch (error) {
+            toast.error(error.response.message);
+            console.log(`the err in updateProfile authstore`,error.message); 
+        }
+        finally{
+            set({isUpdatingProfile: false});
+        }
+    },
+
+   
 }))

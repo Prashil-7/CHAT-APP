@@ -3,7 +3,6 @@ import { useAuthStore } from '../store/useAuthStore';
 import AuthImagePattern from '../Components/AuthImagePattern'
 import {Eye, EyeOff, Loader2, Lock, Mail, MessageSquare , User} from 'lucide-react'
 import { Link } from 'react-router-dom';
-import LoginPage from './LoginPage';
 import toast from 'react-hot-toast'
 
 const  SignupPage = () => {
@@ -120,7 +119,7 @@ const  SignupPage = () => {
                           Loading bhai.....
                           </>
                         ):(
-                          "Create Account bhai"
+                          "Create Account "
                         )}
                       </button>
             </form>
