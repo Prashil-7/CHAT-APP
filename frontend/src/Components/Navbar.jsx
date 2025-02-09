@@ -20,7 +20,7 @@ function Navbar() {
         {/* {right waypoints} */}
 
         <div className='flex items-center gap-2'>
-          <Link to={"/settings"}
+          <Link to={"/setting"}
           className={'btn btn-sm gap-2 transition-colors'}
           >
             <Settings className='w-4 h-4'/>
