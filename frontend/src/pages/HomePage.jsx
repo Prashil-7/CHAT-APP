@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 
 function HomePage() {
@@ -6,4 +7,4 @@ function HomePage() {
   )
 }
 
-export default HomePage
+export default HomePage;
